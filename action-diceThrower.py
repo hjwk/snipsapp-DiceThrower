@@ -36,7 +36,7 @@ class DiceThrower(object):
         numberOfDices = numberOfDicesSlot if numberOfDicesSlot != None else 1
 
         diceTypeSlot = extractSlot(intent_message.slots, "diceType")
-        diceType = 6 if diceTypeSlot == None else diceTypeSlot
+        diceType = diceTypeSlot if diceTypeSlot != None else 6
 
         answer = ""
         for i in range(numberOfDices):
