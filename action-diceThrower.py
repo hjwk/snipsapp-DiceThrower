@@ -23,7 +23,7 @@ class DiceThrower(object):
     def HeadsOrTailsCallback(self, hermes: Hermes, intent_message: IntentMessage):
         hermes.publish_end_session(intent_message.session_id, "")
 
-        heads = random.sample(range(0, 1), 1)
+        heads = random.randint(0, 1)
         answer = "Face" if heads == 1 else "Pile"
 
         hermes.publish_start_session_notification(intent_message.site_id, answer, "")
