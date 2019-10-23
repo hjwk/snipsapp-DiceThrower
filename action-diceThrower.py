@@ -5,6 +5,7 @@ from hermes_python.hermes import Hermes
 from hermes_python.ontology.dialogue.intent import IntentMessage
 
 import random
+from util import *
 
 CONFIG_INI = "config.ini"
 MQTT_IP_ADDR = "localhost"
@@ -29,7 +30,16 @@ class DiceThrower(object):
         hermes.publish_start_session_notification(intent_message.site_id, answer, "")
 
     def ThrowDiceCallback(self, hermes: Hermes, intent_message: IntentMessage):
-        pass
+        hermes.publish_end_session(intent_message.session_id, "")
+
+        answer = ""
+        numberOfDices = extractSlot(intent_message.slots, "numberOfDices")
+        diceType = extractSlot(intent_message.slots, "diceType")
+        for _ in range(numberOfDices):
+            result = random.randint(0, diceType)
+            answer += "{}, ".format(result)
+
+        hermes.publish_start_session_notification(intent_message.site_id, answer, "")
 
     # register callback function to its intent and start listen to MQTT bus
     def start_blocking(self):
