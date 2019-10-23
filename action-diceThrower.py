@@ -34,7 +34,7 @@ class DiceThrower(object):
 
         numberOfDicesSlot = extractSlot(intent_message.slots, "numberOfDices")
         numberOfDices = numberOfDicesSlot if numberOfDicesSlot != None else 1
-        
+
         diceTypeSlot = extractSlot(intent_message.slots, "diceType")
         diceType = 6 if diceTypeSlot == None else diceTypeSlot
 
@@ -45,7 +45,7 @@ class DiceThrower(object):
             if i == (numberOfDices - 2):
                 answer += " et "
             elif i < (numberOfDices - 2):
-                asnwer += ", "
+                answer += ", "
 
         hermes.publish_start_session_notification(intent_message.site_id, answer, "")
 
