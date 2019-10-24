@@ -26,7 +26,7 @@ class DiceThrower(object):
     def GenerateAnswer(self, numberOfDices, typeOfDice):
         answer = ""
         for i in range(numberOfDices):
-            result = random.randint(0, typeOfDice)
+            result = random.randint(1, typeOfDice)
             answer += "{}".format(result)
             if i == (numberOfDices - 2):
                 answer += " et "
